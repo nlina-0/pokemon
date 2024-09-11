@@ -1,3 +1,4 @@
+import { addPokemonToCaughtStorage } from "./caughtPokemonStorage.js"
 import { getMultiplePokemon, getOnePokemon } from "./encounterSystem.js"
 
 let encounterOneButton = document.getElementById("encounter-one")
@@ -9,7 +10,7 @@ encounterOneButton.addEventListener('click', async () => {
     result = [result]
     localStorage.setItem("wildPokemon", JSON.stringify(result))
     
-    renderData()
+    updateScreen()
 })
 
 encounterSixButton.addEventListener('click', async () => {
@@ -17,10 +18,10 @@ encounterSixButton.addEventListener('click', async () => {
     console.log(result)
     localStorage.setItem("wildPokemon", JSON.stringify(result))
 
-    renderData()
+    updateScreen()
 })
 
-function renderData() {
+function renderWildEncounterData() {
     // Retrieve data from local storage
     let pokemonData = localStorage.getItem("wildPokemon")
 
@@ -39,6 +40,29 @@ function renderData() {
     })
 }
 
+// Haven't stored anything to caughtPokemon in localStorage yet
+function renderCaughtPokemonData() {
+    // Retrieve data from local storage
+    let pokemonData = localStorage.getItem("savedPokemon")
+
+    pokemonData = JSON.parse(pokemonData)
+    
+    if (!pokemonData) return
+    pokemonData = pokemonData.filter(item => item)
+
+    // Reference to reuse
+    let caughtPokemonContainer = document.getElementById("pokemon-caught")
+    caughtPokemonContainer.innerText = ""
+
+    pokemonData.forEach(pokemon => {
+        // Build HTML elements to display the data
+        let newElement = buildPokemonDisplayElement(pokemon)
+
+        // Insert new HTML elements into the current page
+        caughtPokemonContainer.appendChild(newElement)
+    })
+}
+
 function buildPokemonDisplayElement(pokemonData) {
     if (!pokemonData) {
         return
@@ -54,6 +78,19 @@ function buildPokemonDisplayElement(pokemonData) {
     pokemonImage.src = pokemonData.sprites?.front_default
     pokemonContainer.appendChild(pokemonImage)
 
+    let captureButton = document.createElement("button")
+    captureButton.addEventListener("click", () => {
+        addPokemonToCaughtStorage(pokemonData)
+        updateScreen()
+    })
+    captureButton.innerText = "Capture " + pokemonData.name
+    pokemonContainer.appendChild(captureButton)
+
     // Returns html
     return pokemonContainer
+}
+
+function updateScreen() {
+    renderWildEncounterData()
+    renderCaughtPokemonData()
 }
