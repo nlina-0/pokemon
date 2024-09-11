@@ -28,16 +28,15 @@ function renderData() {
 
     // Reference to reuse
     let wildPokemonContainer = document.getElementById("pokemon-encounters")
+    wildPokemonContainer.innerText = ""
 
     pokemonData.forEach(pokemon => {
         // Build HTML elements to display the data
-        let newElement = buildPokemonDisplayElement(pokemonData)
+        let newElement = buildPokemonDisplayElement(pokemon)
 
         // Insert new HTML elements into the current page
         wildPokemonContainer.appendChild(newElement)
     })
-
-    
 }
 
 function buildPokemonDisplayElement(pokemonData) {
@@ -52,7 +51,7 @@ function buildPokemonDisplayElement(pokemonData) {
     pokemonContainer.appendChild(pokemonHeading)
 
     let pokemonImage = document.createElement("img")
-    pokemonImage.src = pokemonData.sprites.front_default
+    pokemonImage.src = pokemonData.sprites?.front_default
     pokemonContainer.appendChild(pokemonImage)
 
     // Returns html
