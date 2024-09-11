@@ -20,9 +20,10 @@ async function getMultiplePokemon() {
     ])
 }
 
-export { randomPokemonId, getOnePokemon }
+// Export for browser
+export { randomPokemonId, getOnePokemon, getMultiplePokemon }
 
-// For NodeJS only
+// Export for NodeJS only
 // module.exports = {
 //     randomPokemonId,
 //     getOnePokemon,
