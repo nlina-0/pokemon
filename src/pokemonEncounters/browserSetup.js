@@ -70,7 +70,7 @@ function buildPokemonDisplayElement(pokemonData, isCaught=false) {
 
     let pokemonContainer = document.createElement("div")
 
-    let pokemonHeading = document.createElement("h1")
+    let pokemonHeading = document.createElement("h3")
     pokemonHeading.innerText = pokemonData.name
     pokemonContainer.appendChild(pokemonHeading)
 
