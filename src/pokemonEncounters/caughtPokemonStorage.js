@@ -7,6 +7,7 @@ function addPokemonToCaughtStorage(newPokemon) {
 
     if (!Array.isArray(currentData)){
         currentData = [currentData]
+        // Ensures all items are truthy, removes null 
         currentData = currentData.filter(item => item)
     }
 

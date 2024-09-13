@@ -56,14 +56,14 @@ function renderCaughtPokemonData() {
 
     pokemonData.forEach(pokemon => {
         // Build HTML elements to display the data
-        let newElement = buildPokemonDisplayElement(pokemon)
+        let newElement = buildPokemonDisplayElement(pokemon, true)
 
         // Insert new HTML elements into the current page
         caughtPokemonContainer.appendChild(newElement)
     })
 }
 
-function buildPokemonDisplayElement(pokemonData) {
+function buildPokemonDisplayElement(pokemonData, isCaught=false) {
     if (!pokemonData) {
         return
     }
@@ -78,14 +78,16 @@ function buildPokemonDisplayElement(pokemonData) {
     pokemonImage.src = pokemonData.sprites?.front_default
     pokemonContainer.appendChild(pokemonImage)
 
-    let captureButton = document.createElement("button")
-    captureButton.addEventListener("click", () => {
-        addPokemonToCaughtStorage(pokemonData)
-        updateScreen()
-    })
-    captureButton.innerText = "Capture " + pokemonData.name
-    pokemonContainer.appendChild(captureButton)
-
+    if (!isCaught) {
+        let captureButton = document.createElement("button")
+        captureButton.addEventListener("click", () => {
+            addPokemonToCaughtStorage(pokemonData)
+            updateScreen()
+        })
+        captureButton.innerText = "Capture " + pokemonData.name
+        pokemonContainer.appendChild(captureButton)
+    }
+    
     // Returns html
     return pokemonContainer
 }
