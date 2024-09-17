@@ -1,7 +1,130 @@
+/* .suse-font {
+    font-family: "SUSE", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+} */
+
+* {
+    font-family: "SUSE";
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+#heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+button {
+    /* width: 200px; */
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(214, 214, 214);
+    margin: 0 5px;
+    padding: 0 15px;
+}
+
+button:hover {
+    background-color: rgb(236, 236, 236);
+}
+
+
+/* Pokemon display */
 #app-flex-container {
     display: flex;
-
+    width: 600px;
     div {
         width: 50%
+    }
+}
+
+#app-flex-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+#pokemon-caught,
+#pokemon-encounters,
+#app-flex-container h1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#app-flex-container h2 {
+    height: 60px;
+}
+
+/* Div containing the individual pokemon characters */
+#pokemon-caught div,
+#pokemon-encounters div {
+    max-width: 80%;
+    height: 200px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin: 5px 0;
+}
+
+
+/* Mobile display */
+@media only screen and (max-width: 380px) {
+
+
+    #pokemon-caught div,
+    #pokemon-encounters div {
+        background-color: white;   
+    }
+}
+
+
+@media only screen and (max-width: 799px){
+    #app-flex-container {
+        display: flex;
+        max-width: 100%;
+        div {
+            width: 50%
+        }
+    }
+
+    #app-flex-container div {
+        width: 100%;
+    }
+
+    #pokemon-caught div,
+    #pokemon-encounters div {
+        max-width: 80%;
+        height: 200px;
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 5px 20px;
+        margin: 5px 5px;
     }
 }
