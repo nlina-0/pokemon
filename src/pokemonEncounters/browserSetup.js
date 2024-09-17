@@ -1,5 +1,6 @@
 import { addPokemonToCaughtStorage } from "./caughtPokemonStorage.js"
 import { getMultiplePokemon, getOnePokemon } from "./encounterSystem.js"
+import { removePokemonFromStorage } from "./removePokemonStorage.js"
 
 let encounterOneButton = document.getElementById("encounter-one")
 let encounterSixButton = document.getElementById("encounter-six")
@@ -40,7 +41,6 @@ function renderWildEncounterData() {
     })
 }
 
-// Haven't stored anything to caughtPokemon in localStorage yet
 function renderCaughtPokemonData() {
     // Retrieve data from local storage
     let pokemonData = localStorage.getItem("savedPokemon")
@@ -86,7 +86,16 @@ function buildPokemonDisplayElement(pokemonData, isCaught=false) {
         })
         captureButton.innerText = "Capture " + pokemonData.name
         pokemonContainer.appendChild(captureButton)
+    } else {
+        let removeButton = document.createElement("button")
+        removeButton.addEventListener("click", () => {
+            removePokemonFromStorage(pokemonData)
+            updateScreen()
+        })
+        removeButton.innerText = "Remove " + pokemonData.name
+        pokemonContainer.appendChild(removeButton)
     }
+    
     
     // Returns html
     return pokemonContainer
